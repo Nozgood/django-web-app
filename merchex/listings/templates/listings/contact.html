@@ -1,8 +1,9 @@
 {% extends 'listings/base.html' %}
 {% block content %}
-    <h1>CONTACT US</h1>
-    <h2>MAIL</h2>
-    <p>contact@merchex.com</p>
-    <h2>TELEPHONE</h2>
-    <p>03.27.01.02.03</p>
+    <h1>HAVE YOU GOT AN ASK ?</h1>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="SEND">
+    </form>
 {% endblock content %}
