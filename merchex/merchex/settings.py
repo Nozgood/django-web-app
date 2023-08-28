@@ -58,7 +58,10 @@ ROOT_URLCONF = 'merchex.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # == j'indique qu'à la base du projet il y a un dossier templates à inclure
+            BASE_DIR / "templates"
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,7 +73,9 @@ TEMPLATES = [
         },
     },
 ]
-
+# RUN SERVER => EXEcute python pour ressortir html pur 
+# WSGI = SYNCRHONE
+# ASGI = ASYNCHRONE
 WSGI_APPLICATION = 'merchex.wsgi.application'
 
 
@@ -120,6 +125,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIR = [
+    BASE_DIR / "static"
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

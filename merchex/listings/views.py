@@ -5,16 +5,14 @@ from django.core.mail import send_mail
 
 def band_list(request):
     bands = Band.objects.all()
+
     return render(
         request, 
-        'listings/band_list.html', 
-        {
-            'bands': bands, 
-        }
+        'listings/band_list.html', locals()
     )
 
 def band_detail(request, band_id):
-    band = Band.objects.get(id=band_id)
+    band = Band.objects.get(pk=band_id)
     return render(
         request, 
         'listings/band_detail.html', 
@@ -27,8 +25,10 @@ def about_us(request):
     return render(request, 'listings/about.html')
 
 def contact_us(request):
+    form = ContactUsForm(request.POST if request.method == "POST" else None)
+    form = ContactUsForm((None, request.POST)[request.method == "POST"])
+
     if request.method == 'POST':
-        form = ContactUsForm(request.POST)
 
         if form.is_valid():
             send_mail(
@@ -38,9 +38,6 @@ def contact_us(request):
                 recipient_list=['admin@merchex.xyz'],
             )
         return redirect('contact')
-
-    else:
-        form= ContactUsForm()
 
     return render(
         request, 

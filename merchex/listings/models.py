@@ -11,14 +11,14 @@ class Band(models.Model):
         SYNTH_POP = "SP"
         ALTERNATIVE_ROCK = "AR"
 
-    name = models.fields.CharField(max_length=100)
-    genre = models.fields.CharField(choices= Genre.choices, max_length=5)
-    biography = models.fields.CharField(max_length=1000)
-    year_formed = models.fields.IntegerField(
+    name = models.CharField(max_length=100)
+    genre = models.CharField(choices= Genre.choices, max_length=5)
+    biography = models.CharField(max_length=1000)
+    year_formed = models.IntegerField(
         validators=[MinValueValidator(1900), MaxValueValidator(2023)]
     )
-    active = models.fields.BooleanField(default=True)
-    official_homepage = models.fields.URLField(null=True, blank=True)
+    active = models.BooleanField(default=True)
+    official_homepage = models.URLField(null=True, blank=True)
 
 
 class Listing(models.Model):
@@ -32,9 +32,9 @@ class Listing(models.Model):
         POSTERS = "affiches"
         MISCELLANEOUS = "divers"
 
-    title = models.fields.CharField(max_length=100)
-    desciption = models.fields.CharField(max_length=1000)
-    sold = models.fields.BooleanField(default=False)
-    year = models.fields.IntegerField(null=True)
-    type = models.fields.CharField(choices = ListingType.choices, max_length=20)
+    title = models.CharField(max_length=100)
+    desciption = models.CharField(max_length=1000)
+    sold = models.BooleanField(default=False)
+    year = models.IntegerField(null=True)
+    type = models.CharField(choices = ListingType.choices, max_length=20)
     band =  models.ForeignKey(Band, null=True, on_delete=models.SET_NULL)
